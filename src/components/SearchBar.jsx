@@ -2,7 +2,7 @@ import {
   MagnifyingGlassIcon
 } from '@heroicons/react/24/outline/index.js';
 
-export function SearchBar({ searchData }) {
+export function SearchBar({ searched }) {
   return (
     <div>
       <label htmlFor="search" className="sr-only">
@@ -21,7 +21,7 @@ export function SearchBar({ searchData }) {
           className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />
         <datalist id="years">
-          { searchData.map( field => ( <option value={ field.year } key={ field.year } /> )) }
+          { searched.map( name => ( <option value={ name } key={ name } /> )) }
         </datalist>
       </div>
     </div>

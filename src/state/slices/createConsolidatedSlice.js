@@ -12,7 +12,7 @@ export const createConsolidatedSlice = (set) => ({
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      dataYears.push({ year: doc.id });
+      dataYears.push(doc.id);
     });
 
     set({ consolidatedYears: dataYears });
