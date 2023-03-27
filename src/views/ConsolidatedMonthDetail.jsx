@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Chart from 'react-apexcharts';
 
-export function ConsolidatedDetail() {
+export function ConsolidatedMonthDetail() {
   const { state } = useLocation();
   const [config, setConfig] = useState({
     options: {

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
-  ConsolidatedDetail,
+  ConsolidatedMonthDetail,
   ConsolidatedMonths,
   CreateMonthData,
   Home
@@ -23,7 +23,7 @@ export const appRouter = createBrowserRouter([ {
     },
     {
       path: 'consolidated/:year/:month',
-      element: <ConsolidatedDetail />
+      element: <ConsolidatedMonthDetail />
     }
   ]
 } ]);
