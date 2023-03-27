@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useBoundStore } from '../state/store';
 import { MonthsList } from '../components';
 import Chart from 'react-apexcharts';
+import { ChevronLeftIcon } from '@heroicons/react/24/outline/index.js';
 
 export function ConsolidatedMonths() {
   const { year } = useParams();
@@ -74,16 +75,26 @@ export function ConsolidatedMonths() {
 
   return (
     <>
-      <h2>ConsolidatedMonths</h2>
-
-      { consolidatedData.length > 0 && (
-        <Chart
-          options={config.options}
-          series={config.series}
-          type="area"
-        />
-      ) }
-      <MonthsList list={ consolidatedData } />
+      <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-4">
+          <button type="button" className="w-fit bg-kickads text-white border-0 rounded-md">
+            <Link to={ -1 } className="flex items-center gap-1 py-1 px-2">
+              <ChevronLeftIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
+              Atras
+            </Link>
+          </button>
+        </div>
+        <div className="flex flex-col gap-10">
+          { consolidatedData.length > 0 && (
+            <Chart
+              options={config.options}
+              series={config.series}
+              type="area"
+            />
+          ) }
+          <MonthsList list={ consolidatedData } />
+        </div>
+      </div>
     </>
   );
 }

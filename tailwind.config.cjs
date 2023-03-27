@@ -4,7 +4,11 @@ module.exports = {
     './src/**/*.jsx'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'kickads': '#00afa9'
+      }
+    },
   },
   plugins: [],
 }

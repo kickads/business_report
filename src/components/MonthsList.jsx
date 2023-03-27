@@ -3,8 +3,7 @@ import { CalendarDaysIcon } from '@heroicons/react/24/outline/index.js';
 
 export function MonthsList({ list }) {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <Link to={ -1 }>Atras</Link>
+    <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
       <ul role="list" className="-my-5 divide-y divide-gray-200">
         { list.map((item) => (
           <li key={ item.month } className="py-4">
