@@ -5,9 +5,11 @@ import {
   CreateMonthData,
   Home
 } from '../views';
+import { PublicLayout } from '../layouts';
 
 export const appRouter = createBrowserRouter([ {
   path: '/',
+  element: <PublicLayout />,
   children: [
     {
       index: true,
