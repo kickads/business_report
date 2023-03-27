@@ -1,10 +1,14 @@
 import { CalendarDaysIcon } from '@heroicons/react/24/outline/index.js';
 import { Link } from 'react-router-dom';
+import { useBoundStore } from '../state/store';
 
 export function ConsolidatedList({ list }) {
+  const yearFound = useBoundStore((state) => state.yearFound);
+  const filterList = !yearFound ? list : list.filter(year => year.includes(yearFound));
+
   return (
     <ul role="list" className="-my-5 divide-y divide-gray-200">
-      { list.map(name => (
+      { filterList.map(name => (
         <li key={ name } className="py-4">
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">

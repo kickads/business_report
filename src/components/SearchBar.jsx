@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useBoundStore } from '../state/store';
 import {
   MagnifyingGlassIcon
 } from '@heroicons/react/24/outline/index.js';
 
 export function SearchBar({ searched }) {
+  const { register, watch } = useForm();
+  const findConsolidatedYear = useBoundStore((state) => state.findConsolidatedYear);
+
+  useEffect(() => {
+    findConsolidatedYear(watch('searching'));
+  }, [ watch('searching') ]);
+
   return (
     <div>
       <label htmlFor="search" className="sr-only">
@@ -19,6 +29,7 @@ export function SearchBar({ searched }) {
           list="years"
           autoComplete="off"
           className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          { ...register('searching') }
         />
         <datalist id="years">
           { searched.map( name => ( <option value={ name } key={ name } /> )) }
