@@ -13,9 +13,9 @@ const fm = new FormatMoney({
   separator: ','
 });
 
-const getProfit = (revenue = 0, spend = 0) => {
-  return parseFloat((parseFloat(revenue) - parseFloat(spend)).toFixed(2));
-}
+// const getProfit = (revenue = 0, spend = 0) => {
+//   return parseFloat((parseFloat(revenue) - parseFloat(spend)).toFixed(2));
+// }
 
 export function ConsolidatedMonths() {
   const { year } = useParams();
@@ -74,7 +74,7 @@ export function ConsolidatedMonths() {
         yaxis: {
           labels: {
             formatter: function (value) {
-              return fm.from(value) + "$";
+              return "$" + fm.from(value);
             }
           },
         },

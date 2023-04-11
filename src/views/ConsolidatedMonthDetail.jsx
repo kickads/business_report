@@ -2,27 +2,47 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Chart from 'react-apexcharts';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline/index.js';
+import { FormatMoney } from "format-money-js";
+
+const fm = new FormatMoney({
+  decimals: 2,
+  decimalPoint: '.',
+  separator: ','
+});
 
 export function ConsolidatedMonthDetail() {
   const { state } = useLocation();
   const [config, setConfig] = useState({
     options: {
       chart: {
-        id: "basic-bar",
+        type: "bar",
       },
       xaxis: {
-        categories: ['Revenue', 'Spend', 'Profit']
+        categories: [ 'Revenue', 'Spend', 'Profit' ],
       },
-      plotOptions: {
-        bar: {
-          horizontal: true
-        }
-      }
+      yaxis: {
+        labels: {
+          formatter: function (value) {
+            return "$" + fm.from(value);
+          }
+        },
+      },
+      dataLabels: {
+        enabled: false
+      },
     },
     series: [
       {
-        name: 'total',
-        data: [state.consolidated.revenue, state.consolidated.spend, state.consolidated.profit]
+        name: 'Revenue',
+        data: [state.consolidated.revenue]
+      },
+      {
+        name: 'Spend',
+        data: [state.consolidated.spend]
+      },
+      {
+        name: 'Profit',
+        data: [state.consolidated.profit]
       }
     ]
   });
