@@ -4,9 +4,17 @@ import { useBoundStore } from '../state/store';
 import { MonthsList } from '../components';
 import Chart from 'react-apexcharts';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline/index.js';
+import {FormatMoney} from "format-money-js";
+
+const fm = new FormatMoney({
+  // symbol: '$',
+  decimals: 2,
+  decimalPoint: '.',
+  separator: ','
+});
 
 const getProfit = (revenue = 0, spend = 0) => {
-  return (parseFloat(revenue) - parseFloat(spend)).toFixed(2);
+  return parseFloat((parseFloat(revenue) - parseFloat(spend)).toFixed(2));
 }
 
 export function ConsolidatedMonths() {
@@ -47,10 +55,12 @@ export function ConsolidatedMonths() {
   }, []);
 
   useEffect(() => {
-    // const monthTest = consolidatedData.map(item => ({ ...item, profit: getProfit(item.revenue, item.spend) }));
-    const monthTest = consolidatedData.map(item => ({ ...item, profit: getProfit('30,981.21', '18,963.54') }));
-    // console.log(monthTest);
-    console.log();
+    // const nuevoArray = consolidatedData.map(item => ({
+    //   ...item,
+    //   revenue: fm.from(parseFloat(item.revenue)),
+    //   spend: fm.from(parseFloat(item.spend)),
+    //   profit: fm.from(getProfit(item.revenue, item.spend))
+    // }));
 
     setConfig((olsState) => ({
       ...olsState,
@@ -60,6 +70,13 @@ export function ConsolidatedMonths() {
         },
         xaxis: {
           categories: consolidatedData.map(consolidated => consolidated.month)
+        },
+        yaxis: {
+          labels: {
+            formatter: function (value) {
+              return fm.from(value) + "$";
+            }
+          },
         },
         dataLabels: {
           enabled: false

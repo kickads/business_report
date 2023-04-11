@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.0.16",
     "apexcharts": "^3.37.2",
     "firebase": "^9.18.0",
+    "format-money-js": "^1.6.3",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-dom": "^18.2.0",
