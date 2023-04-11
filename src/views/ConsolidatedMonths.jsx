@@ -5,6 +5,10 @@ import { MonthsList } from '../components';
 import Chart from 'react-apexcharts';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline/index.js';
 
+const getProfit = (revenue = 0, spend = 0) => {
+  return (parseFloat(revenue) - parseFloat(spend)).toFixed(2);
+}
+
 export function ConsolidatedMonths() {
   const { year } = useParams();
   const getConsolidatedById = useBoundStore((state) => state.getConsolidatedById);
@@ -43,6 +47,11 @@ export function ConsolidatedMonths() {
   }, []);
 
   useEffect(() => {
+    // const monthTest = consolidatedData.map(item => ({ ...item, profit: getProfit(item.revenue, item.spend) }));
+    const monthTest = consolidatedData.map(item => ({ ...item, profit: getProfit('30,981.21', '18,963.54') }));
+    // console.log(monthTest);
+    console.log();
+
     setConfig((olsState) => ({
       ...olsState,
       options: {
@@ -71,7 +80,7 @@ export function ConsolidatedMonths() {
         },
       ]
     }))
-  }, [consolidatedData]);
+  }, [ consolidatedData ]);
 
   return (
     <>
