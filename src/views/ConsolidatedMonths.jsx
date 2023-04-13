@@ -6,8 +6,14 @@ import Chart from 'react-apexcharts';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline/index.js';
 import {FormatMoney} from "format-money-js";
 
+const stats = [
+  { id: 1, name: 'Revenue', value: '8,000+' },
+  { id: 2, name: 'Spend', value: '3%' },
+  { id: 3, name: 'Profit', value: '99.9%' },
+]
+
 const fm = new FormatMoney({
-  // symbol: '$',
+  symbol: '$',
   decimals: 2,
   decimalPoint: '.',
   separator: ','
@@ -49,6 +55,7 @@ export function ConsolidatedMonths() {
       },
     ]
   });
+  const [ annualValues, setAnnualValues ] = useState([]);
 
   useEffect(() => {
     getConsolidatedById(year);
@@ -74,7 +81,8 @@ export function ConsolidatedMonths() {
         yaxis: {
           labels: {
             formatter: function (value) {
-              return "$" + fm.from(value);
+              return fm.from(value);
+              // return "$" + fm.from(value);
             }
           },
         },
@@ -96,7 +104,23 @@ export function ConsolidatedMonths() {
           data: consolidatedData.map(consolidated => consolidated.profit)
         },
       ]
-    }))
+    }));
+
+    setAnnualValues([
+      {
+        name: 'Revenue',
+        values: consolidatedData.reduce((acum, current) => acum + parseFloat(current.revenue), 0)
+      },
+      {
+        name: 'Spend',
+        values: consolidatedData.reduce((acum, current) => acum + parseFloat(current.spend), 0)
+      },
+      {
+        name: 'Profit',
+        values: consolidatedData.reduce((acum, current) => acum + parseFloat(current.profit), 0)
+      },
+    ]);
+
   }, [ consolidatedData ]);
 
   return (
@@ -118,6 +142,16 @@ export function ConsolidatedMonths() {
               type="area"
             />
           ) }
+
+          <dl className="bg-kickads text-white mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-3">
+            {annualValues.map((annual) => (
+                <div key={annual.name} className="flex flex-col bg-white/5 p-8">
+                  <dt className="text-sm font-semibold leading-6">{annual.name}</dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight">{fm.from(annual.values)}</dd>
+                </div>
+            ))}
+          </dl>
+
           <MonthsList list={ consolidatedData } />
         </div>
       </div>
