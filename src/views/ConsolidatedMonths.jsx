@@ -19,10 +19,6 @@ const fm = new FormatMoney({
   separator: ','
 });
 
-// const getProfit = (revenue = 0, spend = 0) => {
-//   return parseFloat((parseFloat(revenue) - parseFloat(spend)).toFixed(2));
-// }
-
 export function ConsolidatedMonths() {
   const { year } = useParams();
   const getConsolidatedById = useBoundStore((state) => state.getConsolidatedById);
@@ -62,13 +58,6 @@ export function ConsolidatedMonths() {
   }, []);
 
   useEffect(() => {
-    // const nuevoArray = consolidatedData.map(item => ({
-    //   ...item,
-    //   revenue: fm.from(parseFloat(item.revenue)),
-    //   spend: fm.from(parseFloat(item.spend)),
-    //   profit: fm.from(getProfit(item.revenue, item.spend))
-    // }));
-
     setConfig((olsState) => ({
       ...olsState,
       options: {
