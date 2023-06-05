@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 export function CreateMonthData() {
   const { register, handleSubmit, formState, reset } = useForm();
   const [ show, setShow ] = useState(false);
+  console.log();
 
   const submit = async (data) => {
     console.log(data);

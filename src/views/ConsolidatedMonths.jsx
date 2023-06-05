@@ -53,8 +53,10 @@ export function ConsolidatedMonths() {
   });
   const [ annualValues, setAnnualValues ] = useState([]);
 
+
   useEffect(() => {
     getConsolidatedById(year);
+    console.log(consolidatedData);
   }, []);
 
   useEffect(() => {
